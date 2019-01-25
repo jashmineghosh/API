@@ -1,0 +1,41 @@
+{
+  "_": {
+    "postman_variable_scope": "globals",
+    "postman_exported_at": "2019-01-25T09:54:20.557Z",
+    "postman_exported_using": "Postman/6.7.2"
+  },
+  "id": "f81bfc46-cb71-46b4-8a18-4afed5b9d2f4",
+  "name": "My Workspace Globals",
+  "values": [
+    {
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "2f54bf7d28eaf138233c889134678306",
+      "key": "APPID"
+    },
+    {
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "Chicago",
+      "key": "CITYNAME"
+    },
+    {
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": 4887398,
+      "key": "CITYID"
+    }
+  ],
+  "_postman_variable_scope": "globals",
+  "_postman_exported_at": "2019-01-25T10:49:38.624Z",
+  "_postman_exported_using": "Newman/4.3.1"
+}

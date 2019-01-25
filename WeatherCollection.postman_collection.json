@@ -1,0 +1,127 @@
+{
+	"info": {
+		"_postman_id": "a18335e1-68dd-422f-ba85-73df71cab1e7",
+		"name": "WeatherCollection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get weather by random cityID",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "5d6d4832-0df5-476f-9a8c-cd31b6d2bd8a",
+						"exec": [
+							"var cityIds = [\r",
+							"\t\t\t\t\t\t\t    5206379, // Pittsburgh\",\r",
+							"\t\t\t\t\t\t\t  4440906, // Philadelphia\",\r",
+							"\t\t\t\t\t\t\t    4505716, // Baltimore\",\r",
+							"\t\t\t\t\t\t\t    4160812, // Key West\",\r",
+							"\t\t\t\t\t\t\t    3882428, // Lost Angeles\",\r",
+							"\t\t\t\t\t\t\t    5128638, // New York\",\r",
+							"\t\t\t\t\t\t\t    5809844, // Seattle\",\r",
+							"\t\t\t\t\t\t\t   1723862, // Boston\",\r",
+							"\t\t\t\t\t\t\t    4887398, // Chicago\",\r",
+							"\t\t\t\t\t\t\t    5506956, // Last Vegas\",\r",
+							"\t\t\t\t\t\t\t];\r",
+							"\r",
+							"randomCityID = Math.floor(Math.random() * 10);\r",
+							"\r",
+							"\r",
+							"pm.globals.set(\"CITYID\", cityIds[randomCityID]);"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "6c3bc2b2-9345-4b15-96f8-0e77c37a6ea8",
+						"exec": [
+							"var jsonData = JSON.parse(responseBody)",
+							"",
+							"",
+							"",
+							"pm.globals.set(\"CITYNAME\", jsonData.name);",
+							"",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test('City Name matches Request', function () {",
+							"var contains = false;",
+							"",
+							"var cityFromResponse = pm.globals.get(\"CITYNAME\");",
+							"console.log(cityFromResponse);",
+							"\t\t\t\t\t\t",
+							" if(jsonData.name == cityFromResponse) {",
+							"contains = true;",
+							"}",
+							"else",
+							"",
+							"console.log(\"Unexpected city\");",
+							"pm.expect(contains).to.be.true;",
+							"});",
+							"",
+							"pm.test(\"Contains object: 'weather\", function () {",
+							"var contains = false;",
+							"for (var key in jsonData) {",
+							"if (key == \"weather\") {",
+							" contains = true;",
+							" }",
+							"}",
+							" pm.expect(contains).to.be.true;",
+							"});",
+							"",
+							"pm.test(\"Contains string: 'rain' \", function () {",
+							"var contains = false;",
+							"var expected = \"rain\";",
+							"pm.expect(pm.response.text()).to.include(expected);",
+							"});",
+							"",
+							"pm.test(\"DOES NOT Contain string: 'rain' \", function () {",
+							" var contains = false;",
+							"var expected = \"rain\";",
+							" pm.expect(pm.response.text()).to.not.include(expected);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "api.openweathermap.org/data/2.5/weather?id={{CITYID}}&APPID={{APPID}}",
+					"host": [
+						"api",
+						"openweathermap",
+						"org"
+					],
+					"path": [
+						"data",
+						"2.5",
+						"weather"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "{{CITYID}}"
+						},
+						{
+							"key": "APPID",
+							"value": "{{APPID}}"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
