@@ -5,7 +5,7 @@ echo "You are in the powershell script now..."
 
 $SourceFilePath = $env:WORKSPACE
 $FilenamePostfix = "*.postman_collection.json"
-$EnvironmentFile = "*.postman_environment.json"
+$EnvironmentFile = "*.postman_globals.json"
 
 # Get all Postman test files
 $JsonFiles = Get-ChildItem -Path $SourceFilePath -name -Filter $FilenamePostfix | Sort-Object -Property CreationTime -Descending
